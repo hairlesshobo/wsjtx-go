@@ -57,6 +57,7 @@ type StatusMessage struct {
 	TRPeriod             uint32 `json:"txRxPeriod"`
 	ConfigurationName    string `json:"configName"`
 	TxMessage            string `json:"txMessage"`
+	TxFirst              bool   `json:"txFirst"`
 }
 
 const statusNum = 1

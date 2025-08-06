@@ -104,6 +104,7 @@ func parseMessage(buffer []byte, length int) (interface{}, error) {
 }
 
 // Quick sanity check that we parsed all of the message bytes
+// TODO: this shouldn't be done as it breaks the API specs of "silently ignore extra bits"
 func (p *parser) checkParse(message interface{}) error {
 	if p.cursor != p.length {
 		return fmt.Errorf("%w %s: there were %d bytes left over",
@@ -147,6 +148,7 @@ func (p *parser) parseStatus() (StatusMessage, error) {
 	statusMessage.TRPeriod, err = p.parseUint32()
 	statusMessage.ConfigurationName, err = p.parseUtf8()
 	statusMessage.TxMessage, err = p.parseUtf8()
+	statusMessage.TxFirst, err = p.parseBool()
 	return statusMessage, err
 }
 
